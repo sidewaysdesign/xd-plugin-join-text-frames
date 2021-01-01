@@ -1,0 +1,43 @@
+{
+  "name": "Join Text Frames",
+  "host": {
+    "app": "XD",
+    "minVersion": "21.0"
+  },
+  "id": "97429001",
+  "icons": [
+    {
+      "path": "images/icon@1x.png",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "images/icon@2x.png",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "images/icon@3x.png",
+      "width": 72,
+      "height": 72
+    },
+    {
+      "path": "images/icon@4x.png",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "path": "images/icon@5x.png",
+      "width": 120,
+      "height": 120
+    }
+  ],
+  "uiEntryPoints": [
+    {
+      "type": "menu",
+      "commandId": "joinTextFrames",
+      "shortcut": { "mac": "Cmd+Opt+Shift+J", "win": "Ctrl+Alt+Shift+J" }
+    }
+  ],
+  "version": "0.0.1"
+}
