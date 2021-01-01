@@ -1,7 +1,8 @@
-# io-console-starter-project
+# xd-plugin-join-text-frames
+
 ## Description
 
-This is the starter project to be available to developers who first create an XD plugin instance in [Adobe I/O Console](https://console.adobe.io/plugins).
+Adobe XD plugin to join selected text frames
 
 ## License
 
