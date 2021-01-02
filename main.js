@@ -11,7 +11,7 @@ function joinTextFramesFunction(selection) {
   if (notValidSelection(allFrames)) return
   allFrames = sortByAxis(sortByAxis(allFrames, 'x'), 'y')
   const anchorFrame = allFrames[0]
-  transformNodeCoord(anchorFrame, minAxisValue(allFrames, 'x'), minAxisValue(allFrames, 'y'))
+  transformOffsetNode(anchorFrame, minAxisValue(allFrames, 'x'), minAxisValue(allFrames, 'y'))
   mergeIntoAnchorFrame(anchorFrame, joinTextContent(allFrames), widestFrameValue(allFrames))
   cleanUp(allFrames, selection.items)
 }
@@ -36,7 +36,7 @@ function joinTextContent(items) {
 function widestFrameValue(items) {
   return Math.max.apply(
     Math,
-    items.map(o => o.boundsInParent.width + 0.5)
+    items.map(o => o.boundsInParent.width + 0.5) // adding 0.5 mitigates sub-pixel rounding errors
   )
 }
 function minAxisValue(items, axis) {
@@ -45,8 +45,8 @@ function minAxisValue(items, axis) {
     items.map(o => o.boundsInParent[axis])
   )
 }
-function transformNodeCoord(node, x, y) {
-  let parentCenter = node.boundsInParent // parent's center in parent's coordinates
+function transformOffsetNode(node, x, y) {
+  let parentCenter = node.boundsInParent
   node.placeInParentCoordinates({ x: parentCenter.x - x, y: parentCenter.y - y + node.localBounds.y }, parentCenter)
 }
 function sortByAxis(items, axis) {
