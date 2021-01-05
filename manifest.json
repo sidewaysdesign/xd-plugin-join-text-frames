@@ -35,9 +35,22 @@
   "uiEntryPoints": [
     {
       "type": "menu",
-      "commandId": "joinTextFrames",
-      "shortcut": { "mac": "Cmd+Opt+Shift+J", "win": "Ctrl+Alt+Shift+J" }
+      "label": "Split/Join Text Frames",
+      "menuItems": [
+        {
+          "type": "menu",
+          "label": "Join Selection",
+          "commandId": "joinTextFrames",
+          "shortcut": { "mac": "Cmd+Opt+Shift+J", "win": "Ctrl+Alt+Shift+J" }
+        },
+        {
+          "type": "menu",
+          "label": "Split Selection",
+          "commandId": "splitTextFrames",
+          "shortcut": { "mac": "Cmd+Opt+Shift+X", "win": "Ctrl+Alt+Shift+X" }
+        }
+      ]
     }
   ],
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
