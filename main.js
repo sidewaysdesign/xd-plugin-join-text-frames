@@ -13,11 +13,14 @@ const { getSettings, saveSettings, readSettings } = require('./lib/preferences')
 
 const fs = require('uxp').storage.localFileSystem
 const defaultSettings = {
-  split: {
-    direction: 'vertical',
-    makestack: true
-  }
+  splitdirection: 'vertical',
+  splitcharacter: 'pipe',
+  joinorder: 'selected',
+  joinalignment: 'firstframe',
+  joinoverride: 'left',
+  makestack: true
 }
+
 function joinTextFramesFunction(selection) {
   let allFrames = extractTextFrames(selection.items)
   if (notValidJoinSelection(allFrames)) return
@@ -40,7 +43,6 @@ async function splitTextFramesFunction(selection) {
   const rootStyles = rootTextFrame.styleRanges
   console.log('ORIG', rootStyles[0])
   const rootCtrInParent = rootTextFrame.transform.transformPoint(rootTextFrame.localCenterPoint)
-
   const dividerChar = '|'
   const textContent = rootTextFrame.text
   const splitArray = textContent.split(dividerChar)
@@ -83,6 +85,7 @@ function getDividerWidth(dividerChar, rootStyles, insertionPoint) {
 }
 async function getSplitParameters() {
   const prefs = await getSettings(defaultSettings)
+  console.log(prefs)
   const dialog = getSplitDialog(prefs)
   // Show the dialog and get a result when the user closes it
   const result = await dialog.showModal()
@@ -124,7 +127,8 @@ function transformOffsetNode(node, x, y) {
   node.placeInParentCoordinates({ x: parentCenter.x - x, y: parentCenter.y - y + node.localBounds.y }, parentCenter)
 }
 function sortByAxis(items, axis) {
-  items.sort((a, b) => (a.globalBounds[axis] > b.globalBounds[axis] ? 1 : -1))
+  const sortdirection = axis === 'y' ? -1 : 1
+  items.sort((a, b) => (a.globalBounds[axis] > b.globalBounds[axis] ? -sortdirection : sortdirection))
   return items
 }
 function removeEmptyGroups(items) {
